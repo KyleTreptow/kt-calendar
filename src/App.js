@@ -110,26 +110,37 @@ class App extends Component {
     let hours = s.hours < 12 ? s.hours : s.hours - 12;
     let ampm = s.hours < 12 ? 'AM' : 'PM';
     let firstDay = this.getDayOne(s.year, s.month);
-    // let firstDayName = s.dayNamesFull[firstDay];
     let monthLength = s.daysInMonth[s.month];
-    if (s.month === 1) { // February only!
+    if (s.month === 1) { // February only...
       if ((s.year % 4 === 0 && s.year % 100 !== 0) || s.year % 400 === 0){
         monthLength = 29;
       }
     }
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Calendar</h1>
+      <div className="app">
+        <header className="app__header">
+          <h1 className="app__title">Calendar</h1>
           <p>{s.dayNamesFull[s.todayDay] + ' ' + s.todayDate + ' ' + s.monthNames[s.todayMonth] + ' ' + s.todayYear  }</p>
           <p>{hours + ':' + minutes + ' ' + ampm + ' (' + secs + ' secs)'}</p>
         </header>
-        <main className="container">
+        <main className="app__container">
           <h2> { s.monthNamesFull[s.month] + ' ' + s.year} </h2>
-          <ul className="list-inline">
-            <li><button onClick={() => { this.prevMonth() }} >Prev Month</button></li>
-            <li><button onClick={() => { this.setInitDate() }} >Reset</button></li>
-            <li><button onClick={() => { this.nextMonth() }} >Next Month</button></li>
+          <ul className="list list--inline">
+            <li className="list__item">
+              <button className="button" onClick={() => { this.prevMonth() }} >
+                Prev Month
+              </button>
+            </li>
+            <li className="list__item">
+              <button className="button" onClick={() => { this.setInitDate() }} >
+                Reset
+              </button>
+            </li>
+            <li className="list__item">
+              <button className="button" onClick={() => { this.nextMonth() }} >
+                Next Month
+              </button>
+            </li>
           </ul>
           <div className="calendar">
             {s.dayNames.map((item, i) => (

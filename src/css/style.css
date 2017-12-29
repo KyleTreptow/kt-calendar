@@ -1,3 +1,25 @@
+.block__element {
+  display: block; }
+
+.block--modifier {
+  display: block; }
+
+@media screen and (max-width: 767px) {
+  .block {
+    display: block; }
+    .block__element {
+      display: block; }
+    .block--modifier {
+      display: block; } }
+
+@media screen and (max-width: 767px) {
+  .block {
+    display: block; }
+    .block__element {
+      display: block; }
+    .block--modifier {
+      display: block; } }
+
 *,
 *:before,
 *:after {
@@ -15,32 +37,25 @@ body {
   padding: 0;
   font-family: sans-serif; }
 
-.App {
+.app {
   text-align: center; }
+  .app__header {
+    background-color: #222;
+    padding: 20px;
+    color: white; }
+  .app__title {
+    font-size: 2em; }
+  .app__container {
+    width: 600px;
+    max-width: 100%;
+    margin: auto;
+    padding: 20px; }
 
-.App-header {
-  background-color: #222;
-  padding: 20px;
-  color: white; }
-
-.App-title {
-  font-size: 1.5em; }
-
-.App-intro {
-  font-size: large; }
-
-.list-inline {
+.list {
   padding: 0; }
-
-.list-inline li {
-  display: inline-block;
-  padding: 0 8px; }
-
-.container {
-  width: 600px;
-  max-width: 100%;
-  margin: auto;
-  padding: 20px; }
+  .list__item {
+    display: inline-block;
+    padding: 0 8px; }
 
 .calendar {
   max-width: 100%;
@@ -51,17 +66,18 @@ body {
   border: solid 1px #ddd;
   padding: 8px;
   background: #eee; }
+  .cell--blank {
+    background: #fff;
+    border: 0; }
+  .cell--header {
+    background: #222;
+    border-color: #111;
+    color: #eee; }
+  .cell--active {
+    background: #83D0F3;
+    border-color: #3f87a6;
+    color: #333; }
 
-.cell--blank {
-  background: #fff;
-  border: 0; }
-
-.cell--header {
-  background: #222;
-  border-color: #111;
-  color: #eee; }
-
-.cell--active {
-  background: #83D0F3;
-  border-color: #3f87a6;
-  color: #333; }
+.button {
+  padding: 4px 15px;
+  border-radius: 4px; }

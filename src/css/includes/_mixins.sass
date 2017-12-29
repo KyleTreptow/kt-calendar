@@ -1,0 +1,79 @@
+///////////////////////////////////////////////////////
+// Mixins
+///////////////////////////////////////////////////////
+
+// Gradient
+=gradient-bg-vert($clr-a, $clr-b)
+  background: $clr-a
+  background: -moz-linear-gradient(top, $clr-a 0%, $clr-b 100%)
+  background: -webkit-linear-gradient(top, $clr-a 0%, $clr-b 100%)
+  background: linear-gradient(to bottom, $clr-a 0%, $clr-b 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$clr-a', endColorstr='$clr-b',GradientType=0 )
+
+=gradient-bg-horiz($clr-a, $clr-b)
+  background: $clr-a
+  background: -moz-linear-gradient(left, $clr-a 0%, $clr-b 100%)
+  background: -webkit-linear-gradient(left, $clr-a 0%,$clr-b 100%)
+  background: linear-gradient(to right, $clr-a 0%,$clr-b 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$clr-a', endColorstr='$clr-b',GradientType=1 )
+
+// Transition
+=transition($prop)
+  -webkit-transition: $prop 0.3s ease-out
+  -moz-transition: $prop 0.3s ease-out
+  -ms-transition: $prop 0.3s ease-out
+  -o-transition: $prop 0.3s ease-out
+  transition: $prop 0.3s ease-out
+
+=transition-2($prop-a, $prop-b)
+  -webkit-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out
+  -moz-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out
+  -ms-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out
+  -o-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out
+  transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out
+
+=transition-3($prop-a, $prop-b, $prop-c)
+  -webkit-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out, $prop-c 0.3s ease-out
+  -moz-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out, $prop-c 0.3s ease-out
+  -ms-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out, $prop-c 0.3s ease-out
+  -o-transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out, $prop-c 0.3s ease-out
+  transition: $prop-a 0.3s ease-out, $prop-b 0.3s ease-out, $prop-c 0.3s ease-out
+
+// Transform
+=transform-translate($x, $y)
+  -webkit-transition: translate($x, $y)
+  -moz-transition: translate($x, $y)
+  -ms-transition: translate($x, $y)
+  -o-transform: translate($x, $y)
+  transform: translate($x, $y)
+
+=transform-rotate($deg)
+  -webkit-transform: rotate($deg)
+  -moz-transform: rotate($deg)
+  -ms-transform: rotate($deg)
+  -o-transform: rotate($deg)
+  transform: rotate($deg)
+
+=transform-scale($w, $h)
+  -webkit-transform: scale($w, $h)
+  -moz-transform: scale($w, $h)
+  -ms-transform: scale($w, $h)
+  -o-transform: scale($w, $h)
+  transform: scale($w, $h)
+
+// Triangles
+=tri-up($size, $color)
+  width: 0
+  height: 0
+  border-style: solid
+  border-width: 0 $size $size $size
+  border-color: transparent transparent $color transparent
+
+// Font Awesome
+=awesome()
+  display: inline-block
+  font: normal normal normal 14px/1 FontAwesome
+  font-size: inherit
+  text-rendering: auto
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale

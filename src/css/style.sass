@@ -1,3 +1,47 @@
+//////////////////////////////////////////////
+// Imports / Includes
+//////////////////////////////////////////////
+
+@import "includes/_functions.sass"
+@import "includes/_mixins.sass"
+
+// media breakpoints (min)
+$media-min-xs: "screen and (min-width: 576px)"
+$media-min-sm: "screen and (min-width: 768px)"
+$media-min-md: "screen and (min-width: 992px)"
+$media-min-lg: "screen and (min-width: 1200px)"
+$media-min-xl: "screen and (min-width: 1400px)"
+
+// media breakpoints (max)
+$media-max-xs: "screen and (max-width: 575px)"
+$media-max-sm: "screen and (max-width: 767px)"
+$media-max-md: "screen and (max-width: 991px)"
+$media-max-lg: "screen and (max-width: 1199px)"
+$media-max-xl: "screen and (max-width: 1399px)"
+
+// BEM example
+.block
+  &__element
+    display: block
+  &--modifier
+    display: block
+  @media #{$media-max-sm}
+    display: block
+    &__element
+      display: block
+    &--modifier
+      display: block
+  @media #{$media-max-sm}
+    display: block
+    &__element
+      display: block
+    &--modifier
+      display: block
+
+//////////////////////////////////////////////
+// Reset
+//////////////////////////////////////////////
+
 *,
 *:before,
 *:after
@@ -15,54 +59,85 @@ body
   padding: 0
   font-family: sans-serif
 
+//////////////////////////////////////////////
+// Component: App
+//////////////////////////////////////////////
 
-.App
+.app
   text-align: center
+  &__header
+    background-color: #222
+    padding: 20px
+    color: white
+  &__title
+    font-size: 2em
+  &__container
+    width: 600px
+    max-width: 100%
+    margin: auto
+    padding: 20px
 
-.App-header
-  background-color: #222
-  padding: 20px
-  color: white
+//////////////////////////////////////////////
+// Component: List
+//////////////////////////////////////////////
 
-.App-title
-  font-size: 1.5em
-
-.App-intro
-  font-size: large
-
-.list-inline
+.list
+  &--inline
   padding: 0
+  &__item
+    display: inline-block
+    padding: 0 8px
 
-.list-inline li
-  display: inline-block
-  padding: 0 8px
-
-.container
-  width: 600px
-  max-width: 100%
-  margin: auto
-  padding: 20px
+//////////////////////////////////////////////
+// Component: Calendar
+//////////////////////////////////////////////
 
 .calendar
   max-width: 100%
   display: grid
   grid-template-columns: repeat(7, 1fr)
 
+//////////////////////////////////////////////
+// Component: Cell
+//////////////////////////////////////////////
+
 .cell
   border: solid 1px #ddd
   padding: 8px
   background: #eee
+  &--blank
+    background: #fff
+    border: 0
+  &--header
+    background: #222
+    border-color: #111
+    color: #eee
+  &--active
+    background: #83D0F3
+    border-color: #3f87a6
+    color: #333
 
-.cell--blank
-  background: #fff
-  border: 0
+//////////////////////////////////////////////
+// Component: Button
+//////////////////////////////////////////////
 
-.cell--header
-  background: #222
-  border-color: #111
-  color: #eee
+.button
+  padding: 4px 15px
+  border-radius: 4px
 
-.cell--active
-  background: #83D0F3
-  border-color: #3f87a6
-  color: #333
+
+//////////////////////////////////////////////
+// Component: #
+//////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////
+// Component: #
+//////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////
+// Component: #
+//////////////////////////////////////////////
