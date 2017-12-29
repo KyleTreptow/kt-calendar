@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './css/style.css';
 
 class App extends Component {
   constructor(props) {
@@ -50,7 +49,7 @@ class App extends Component {
   componentDidMount() {
     this.setInitDate();
     this.tick();
-    this.interval = setInterval(() => this.tick(), 1000);
+    this.interval = setInterval(() => this.tick(), 500);
   }
   componentWillUnmount() {
     clearInterval(this.interval);
@@ -111,7 +110,7 @@ class App extends Component {
     let hours = s.hours < 12 ? s.hours : s.hours - 12;
     let ampm = s.hours < 12 ? 'AM' : 'PM';
     let firstDay = this.getDayOne(s.year, s.month);
-    let firstDayName = s.dayNamesFull[firstDay];
+    // let firstDayName = s.dayNamesFull[firstDay];
     let monthLength = s.daysInMonth[s.month];
     if (s.month === 1) { // February only!
       if ((s.year % 4 === 0 && s.year % 100 !== 0) || s.year % 400 === 0){
@@ -122,7 +121,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Calendar</h1>
-          <p>{s.dayNamesFull[s.todayDay] + ' ' + s.todayDate + ' ' + s.monthNamesFull[s.todayMonth] + ' ' + s.todayYear  }</p>
+          <p>{s.dayNamesFull[s.todayDay] + ' ' + s.todayDate + ' ' + s.monthNames[s.todayMonth] + ' ' + s.todayYear  }</p>
           <p>{hours + ':' + minutes + ' ' + ampm + ' (' + secs + ' secs)'}</p>
         </header>
         <main className="container">

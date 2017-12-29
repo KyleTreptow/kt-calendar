@@ -19,8 +19,8 @@
   },
   "scripts": {
     "serve": "npm run build && PORT=2001 nodemon ./bin/www",
-    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/sass/ -o src/sass/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/sass/ -o src/sass/ --watch --recursive",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/css/ -o src/css/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/css/ -o src/css/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
