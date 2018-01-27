@@ -19,24 +19,35 @@ $media-max-md: "screen and (max-width: 991px)"
 $media-max-lg: "screen and (max-width: 1199px)"
 $media-max-xl: "screen and (max-width: 1399px)"
 
-// BEM example
-.block
-  &__element
-    display: block
-  &--modifier
-    display: block
-  @media #{$media-max-sm}
-    display: block
-    &__element
-      display: block
-    &--modifier
-      display: block
-  @media #{$media-max-sm}
-    display: block
-    &__element
-      display: block
-    &--modifier
-      display: block
+// colors
+$clr--main: #190f2e
+$clr--alt: #54234e
+$clr--hlt: #ffc1c1
+$clr--hlt--alt: $clr--hlt
+$clr--bg: #f7f5fc
+$clr--text: #666
+$clr--title: $clr--alt
+
+// fonts
+$font--main: "'Open Sans', sans-serif"
+$font--title: "'Raleway', sans-serif"
+
+// Typography
+$bfs: 14px
+$blh: round($bfs * 1.4)
+
+// Font Scale Factor
+// 1.067: Minor Second
+// 1.125: Major Second
+// 1.200: Minor Third
+// 1.250: Major Third
+// 1.333: Perfect Fourth
+// 1.414: Augmented Fourth
+// 1.500: Perfect Fifth
+// 1.618: Golden Ratio
+
+$scale-factor: 1.414
+
 
 //////////////////////////////////////////////
 // Reset
@@ -45,19 +56,64 @@ $media-max-xl: "screen and (max-width: 1399px)"
 *,
 *:before,
 *:after
-  -webkit-box-sizing: inherit
-  -moz-box-sizing: inherit
-  box-sizing: inherit
-
-html
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
   box-sizing: border-box
 
+html
+  font-size: $bfs
+  line-height: $blh
+  -webkit-box-sizing: inherit
+  -moz-box-sizing: inherit
+  box-sizing: inherit
+
 body
+  font-size: $bfs
+  line-height: $blh
   margin: 0
   padding: 0
-  font-family: sans-serif
+  font-family: #{$font--main}
+  font-weight: 300
+
+h1, h2, h3, h4, h5, h6
+  color: $clr--title
+  font-family: #{$font--title}
+  font-weight: 300
+  margin-top: 0
+  margin-bottom: $blh
+
+h1
+  line-height: $blh * 2.5
+  font-size: $bfs * pow($scale-factor, 3)
+
+h2
+  line-height: $blh * 2
+  font-size: $bfs * pow($scale-factor, 2)
+
+h3
+  font-size: $bfs * $scale-factor
+  line-height: $blh * 1.5
+
+h4
+  font-size: $bfs
+
+h5,
+small,
+button
+  line-height: $blh
+  font-size: $bfs / $scale-factor
+
+p, ul, ol
+  margin-top: 0
+  margin-bottom: $blh
+
+a
+  color: darken($clr--hlt, 10%)
+  text-decoration: none
+  &:hover,
+  &:focus,
+  &:active
+    text-decoration: underline
 
 //////////////////////////////////////////////
 // Component: App
@@ -65,17 +121,41 @@ body
 
 .app
   text-align: center
+  color: $clr--text
   &__header
-    background-color: #222
-    padding: 20px
-    color: white
+    padding-top: $blh
+    color: #fff
+    +gradient-bg-diag($clr--main, $clr--alt)
   &__title
-    font-size: 2em
+    color: #fff
+  &__subtitle
+    color: $clr--main
   &__container
     width: 600px
     max-width: 100%
     margin: auto
-    padding: 20px
+    padding: $blh
+  &__footer
+    text-align: left
+    background: $clr--bg
+    padding: $blh
+    color: $clr--alt
+  &__aside
+    visibility: hidden
+    position: fixed
+    z-index: -100
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,0.65)
+    padding: $blh
+    opacity: 0.01
+    +transition(opacity)
+    .app--event &
+      visibility: visible
+      z-index: 100
+      opacity: 1
 
 //////////////////////////////////////////////
 // Component: List
@@ -84,9 +164,10 @@ body
 .list
   &--inline
   padding: 0
+  margin-bottom: $blh * 1.5
   &__item
     display: inline-block
-    padding: 0 8px
+    padding: 0 $blh/4
 
 //////////////////////////////////////////////
 // Component: Calendar
@@ -96,46 +177,88 @@ body
   max-width: 100%
   display: grid
   grid-template-columns: repeat(7, 1fr)
+  margin-bottom: $blh * 1.5
 
 //////////////////////////////////////////////
 // Component: Cell
 //////////////////////////////////////////////
 
 .cell
-  border: solid 1px #ddd
-  padding: 8px
-  background: #eee
+  padding: $blh/4
+  background: $clr--bg
+  border: solid 1px darken($clr--bg, 5%)
+  position: relative
+  z-index: 0
   &--blank
     background: #fff
     border: 0
   &--header
-    background: #222
-    border-color: #111
-    color: #eee
+    background: $clr--alt
+    border-color: darken($clr--alt, 5%)
+    color: $clr--bg
+  &--btn
+    &:hover,
+    &:focus,
+    &:active
+      +transition(background-color)
+      background: darken($clr--bg, 5%)
+      cursor: pointer
+    &:focus
+      z-index: 10
   &--active
-    background: #83D0F3
-    border-color: #3f87a6
-    color: #333
+    background: $clr--hlt
+    border-color: darken($clr--hlt, 5%)
+    color: $clr--title
+    &:hover,
+    &:focus,
+    &:active
+      +transition(background-color)
+      background: darken($clr--hlt, 5%)
+    &:focus
+      z-index: 10
+
 
 //////////////////////////////////////////////
 // Component: Button
 //////////////////////////////////////////////
 
 .button
-  padding: 4px 15px
+  color: $clr--alt
+  padding: $blh/4 $blh/2
   border-radius: 4px
-
-
-//////////////////////////////////////////////
-// Component: #
-//////////////////////////////////////////////
-
-
+  font-family: #{$font--main}
+  font-weight: 700
+  text-transform: uppercase
 
 //////////////////////////////////////////////
-// Component: #
+// Component: Section
 //////////////////////////////////////////////
 
+.section
+  text-align: left
+
+//////////////////////////////////////////////
+// Component: Modal
+//////////////////////////////////////////////
+
+.modal
+  height: 100%
+  &__overlay
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: transparent
+    border: 0
+  &__inner
+    position: relative
+    z-index: 100
+    background: #fff
+    height: 100%
+    border-radius: $blh/4
+    padding: $blh
+    text-align: left
 
 
 //////////////////////////////////////////////

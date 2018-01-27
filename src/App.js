@@ -19,7 +19,8 @@ class App extends Component {
       todayDay: 0,
       todayDate: 0,
       todayMonth: 0,
-      todayYear: 0
+      todayYear: 0,
+      eventActive: false
     };
   }
   setInitDate() {
@@ -55,59 +56,89 @@ class App extends Component {
     clearInterval(this.interval);
   }
   nextMonth(){
-    if(this.state.month === 11){
+    let s = this.state;
+    if(s.month === 11){
       this.setState({
-        year: this.state.year + 1,
+        year: s.year + 1,
         month: 0
       });
     } else {
       this.setState({
-        month: this.state.month + 1
+        month: s.month + 1
       });
     }
   }
   prevMonth(){
-    if(this.state.month === 0){
+    let s = this.state;
+    if(s.month === 0){
       this.setState({
-        year: this.state.year - 1,
+        year: s.year - 1,
         month: 11
       });
     } else {
       this.setState({
-        month: this.state.month - 1
+        month: s.month - 1
       });
     }
   }
-  isCurrentDayCell(dayNum){
+  isCurrentDayCell(date){
+    let s = this.state;
     if(
-      dayNum === this.state.todayDate &&
-      this.state.month === this.state.todayMonth &&
-      this.state.year === this.state.todayYear ) {
+      date === s.todayDate &&
+      s.month === s.todayMonth &&
+      s.year === s.todayYear ) {
       return true;
     }
     return false;
+  }
+  activateCell(d){
+    let y = this.state.year;
+    let m = this.state.monthNamesFull[this.state.month];
+    // alert('Day: ' + d + ', Month: ' + m + ', Year: ' + y);
+    this.setState({
+      eventActive: true
+    });
+  }
+  deactivateCell(){
+    this.setState({
+      eventActive: false
+    });
   }
   renderDayCells(num, start){
     let cells = []
     for(let i = 1; i <= (num + start); i++){
       if(i <= start) {
-        cells.push(<div className="cell cell--blank"></div>);
+        cells.push(<div key={i} className="cell cell--blank"></div>);
       } else {
         let dayNum = i - start;
-        let cellClass = "cell";
+        let cellClass = "cell cell--btn";
         if(this.isCurrentDayCell(dayNum)) {
-          cellClass = "cell cell--active";
+          cellClass = "cell cell--btn cell--active";
         }
-        cells.push(<div className={cellClass}> {dayNum} </div>);
+        cells.push(
+          <button
+            key={i}
+            className={cellClass}
+            onClick={() => { this.activateCell(dayNum) }} >
+            {dayNum}
+          </button>
+        );
       }
     }
     return(cells);
   }
   render() {
+    let appClass = "app";
+    if(this.state.eventActive){
+      appClass = "app app--event"
+    }
     let s = this.state;
     let minutes = s.minutes < 10 ? ('0'+s.minutes) : s.minutes;
     let secs = s.seconds < 10 ? ('0'+s.seconds) : s.seconds;
     let hours = s.hours < 12 ? s.hours : s.hours - 12;
+    if(s.hours === 0){ // Midnight only...
+      hours = 12;
+    }
     let ampm = s.hours < 12 ? 'AM' : 'PM';
     let firstDay = this.getDayOne(s.year, s.month);
     let monthLength = s.daysInMonth[s.month];
@@ -117,14 +148,17 @@ class App extends Component {
       }
     }
     return (
-      <div className="app">
+      <div className={appClass}>
         <header className="app__header">
-          <h1 className="app__title">Calendar</h1>
-          <p>{s.dayNamesFull[s.todayDay] + ' ' + s.todayDate + ' ' + s.monthNames[s.todayMonth] + ' ' + s.todayYear  }</p>
-          <p>{hours + ':' + minutes + ' ' + ampm + ' (' + secs + ' secs)'}</p>
+          <div className="app__container">
+            <h1 className="app__title">React Calendar</h1>
+            <p>{s.dayNamesFull[s.todayDay] + ' ' + s.todayDate + ' ' + s.monthNames[s.todayMonth] + ' ' + s.todayYear  }</p>
+            <p>{hours + ':' + minutes + ':' + secs + ' ' + ampm}</p>
+          </div>
         </header>
         <main className="app__container">
-          <h2> { s.monthNamesFull[s.month] + ' ' + s.year} </h2>
+          <h2 className="app__subtitle">
+            {s.monthNamesFull[s.month] + ' ' + s.year} </h2>
           <ul className="list list--inline">
             <li className="list__item">
               <button className="button" onClick={() => { this.prevMonth() }} >
@@ -144,11 +178,37 @@ class App extends Component {
           </ul>
           <div className="calendar">
             {s.dayNames.map((item, i) => (
-              <div className="cell cell--header">{item}</div>
+              <div key={item} className="cell cell--header">{item}</div>
             ))}
             {this.renderDayCells(monthLength, firstDay)}
           </div>
+          <section className="section">
+            <h2>Layout Example Text</h2>
+            <p>Lorem ipsum dolor sit amet, aduo id graeco molestiae incorrupte. Mel eu prima praesent facilisis, ei illum definiebas mel. Altera posidonium ei vel. Sit ridens quaeque ut, purto ancillae sapientem usu ei.</p>
+            <p><a href="/">Link Here</a> | <a href="/">Link Here</a> | <a href="/">Link Here</a></p>
+            <h3>Eius mei Soluta</h3>
+            <p>Eius soluta at mei. Intellegebat disputationi ad pri, animal viderer duo cu. Nec ex fugit virtute repudiandae. Vis id unum audiam. </p>
+            <h4>Fugit virtute</h4>
+            <p>Et eam debet constituam consectetuer, eu alii dolor timeam mea.</p>
+          </section>
         </main>
+        <aside className="app__aside">
+          <div className="modal">
+            <button
+              className="modal__overlay"
+              onClick={() => { this.deactivateCell() }}></button>
+            <div className="modal__inner">
+              <button className="button" onClick={() => {
+                this.deactivateCell() }} >X</button>
+              <p>Modal Info</p>
+            </div>
+          </div>
+        </aside>
+        <footer className="app__footer">
+          <div className="app__container">
+            <p>React Calendar App - Kyle Treptow, Dec 2017</p>
+          </div>
+        </footer>
       </div>
     );
   }

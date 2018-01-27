@@ -17,6 +17,13 @@
   background: linear-gradient(to right, $clr-a 0%,$clr-b 100%)
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$clr-a', endColorstr='$clr-b',GradientType=1 )
 
+=gradient-bg-diag($clr-a, $clr-b)
+  background: $clr-a
+  background: -moz-linear-gradient(-45deg, $clr-a 0%, $clr-b 100%)
+  background: -webkit-linear-gradient(-45deg, $clr-a 0%, $clr-b 100%)
+  background: linear-gradient(135deg, $clr-a 0%, $clr-b 100%)
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$clr-a', endColorstr='$clr-b',GradientType=1 )
+
 // Transition
 =transition($prop)
   -webkit-transition: $prop 0.3s ease-out
@@ -70,10 +77,10 @@
   border-color: transparent transparent $color transparent
 
 // Font Awesome
-=awesome()
-  display: inline-block
-  font: normal normal normal 14px/1 FontAwesome
-  font-size: inherit
-  text-rendering: auto
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
+// =awesome()
+//   display: inline-block
+//   font: normal normal normal 14px/1 FontAwesome
+//   font-size: inherit
+//   text-rendering: auto
+//   -webkit-font-smoothing: antialiased
+//   -moz-osx-font-smoothing: grayscale
